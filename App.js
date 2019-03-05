@@ -1,11 +1,14 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React,{ Component } from 'react';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 
-export default class App extends React.Component {
+export default class App extends Component {
+
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>Hi!!! I`AM LEE IL HOON</Text>
+        <View style={styles.redView}></View>
+        <View style={styles.yellowView}></View>
       </View>
     );
   }
@@ -15,7 +18,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent : 'center',
+    alignItems:'center',
+  },
+  redView:{
+    height:50,
+    width:50,
+    backgroundColor:'red',
+  },
+  yellowView:{
+    height:50,
+    width:50,
+    backgroundColor:'yellow',
   },
 });
+
