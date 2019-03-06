@@ -2,13 +2,19 @@ import React,{ Component } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 
 export default class App extends Component {
-
+  state = {
+    isLoaded : false,
+  }
 
   render() {
+    const { isLoaded } = this.state;
     return (
       <View style={styles.container}>
-        <View style={styles.redView}></View>
-        <View style={styles.yellowView}></View>
+        { isLoaded ? null : (
+        <View style={styles.loading}>
+          <ActivityIndicator/>
+          <Text style={styles.loadingText}>Getting the Weather</Text>
+        </View>)}
       </View>
     );
   }
@@ -16,20 +22,20 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent : 'center',
-    alignItems:'center',
+    flex : 1,
+    backgroundColor : '#fff',
   },
-  redView:{
-    height:50,
-    width:50,
-    backgroundColor:'red',
+  loading : {
+    backgroundColor : '#fdf6aa',
+    flex : 1,
+    justifyContent : 'flex-end',
+    //paddingLeft : 25,
   },
-  yellowView:{
-    height:50,
-    width:50,
-    backgroundColor:'yellow',
+  loadingText : {
+    fontSize : 30,
+    marginBottom : 100,
+    textAlign : 'center',
+    marginTop : 20,
   },
 });
 
