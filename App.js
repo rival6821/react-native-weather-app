@@ -3,6 +3,7 @@ import { ActivityIndicator, StyleSheet, Text, View, StatusBar } from 'react-nati
 import Weather from './Weather';
 
 const APP_KEY = "33bf830a75bbaf2a0a9229d6c7f5c6da";
+const NEAR_AIR_KOREA_KEY = "s1yAfTYEGUMulWPpUbEQSGeQRqbSHRxjfVhI1fclwmfjXzAhXhUBnBEj6YLbZbNVS%2FTr8LF58A%2FaTBDScxrx0A%3D%3D";
 
 export default class App extends Component {
   state = {
@@ -15,6 +16,10 @@ export default class App extends Component {
   componentDidMount(){
     navigator.geolocation.getCurrentPosition(position => {
       this._getWeather(position.coords.latitude, position.coords.longitude);
+
+      this._changeTM(position.coords.latitude, position.coords.longitude);
+      console.log('lat',position.coords.latitude);
+      console.log('lon',position.coords.longitude);
     },
     error => {
       this.setState({
@@ -25,6 +30,7 @@ export default class App extends Component {
     );
   }
 
+  // 날씨정보 가져오기
   _getWeather = (lat, lon) => {
     fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APP_KEY}&units=metric`)
     .then(response => response.json())
@@ -35,6 +41,23 @@ export default class App extends Component {
         isLoaded : true
       });
       console.log(json.weather[0].main);
+    })
+  }
+
+  // gps좌표계를 TM좌표계로 변환
+  _changeTM = ( lat, lon ) => {
+    let headers = {
+      Authorization : 'KakaoAK 2fc2b0132f7ab611be7e896d378ecc47'
+    }
+    fetch(`https://dapi.kakao.com/v2/local/geo/transcoord.json?x=${lon}&y=${lat}&input_coord=WGS84&output_coord=TM`,
+    { method : 'GET', headers : headers })
+    .then(res => res.json())
+    .then(json => {
+      let tmX = json.documents[0].x;
+      let tmY = json.documents[0].y;
+      fetch(`http://openapi.airkorea.or.kr/openapi/services/rest/MsrstnInfoInqireSvc/getNearbyMsrstnList?tmX=${tmX}&tmY=${tmY}&pageNo=1&numOfRows=10&ServiceKey=${NEAR_AIR_KOREA_KEY}&_returnType=json`)
+      .then(res => console.log(res))
+      
     })
   }
 
