@@ -52,6 +52,30 @@ const weatherCases = {
         title : "안개가 자욱합니다",
         subTitle : "운전에 조심하세요",
         icon : 'ios-menu'
+    },
+    Mist : {
+        colors : ['#d7d2cc','#304352'],
+        title : "안개가 자욱합니다",
+        subTitle : "운전에 조심하세요",
+        icon : 'ios-menu'
+    },
+    Smoke : {
+        colors : ['#d7d2cc','#304352'],
+        title : "안개가 자욱합니다",
+        subTitle : "운전에 조심하세요",
+        icon : 'ios-menu'
+    },
+    Dust : {
+        colors : ['#d7d2cc','#304352'],
+        title : "안개가 자욱합니다",
+        subTitle : "운전에 조심하세요",
+        icon : 'ios-menu'
+    },
+    Sand : {
+        colors : ['#d7d2cc','#304352'],
+        title : "안개가 자욱합니다",
+        subTitle : "운전에 조심하세요",
+        icon : 'ios-menu'
     }
 }
 
