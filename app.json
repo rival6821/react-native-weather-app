@@ -23,7 +23,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "xyz.rival6821"
+    },
+    "android" : {
+      "package" : "xyz.rival6821"
     }
   }
 }
