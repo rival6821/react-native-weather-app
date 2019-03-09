@@ -3,20 +3,24 @@ import { ActivityIndicator, StyleSheet, Text, View, StatusBar } from 'react-nati
 import Weather from './Weather';
 
 const APP_KEY = "33bf830a75bbaf2a0a9229d6c7f5c6da";
-const NEAR_AIR_KOREA_KEY = "s1yAfTYEGUMulWPpUbEQSGeQRqbSHRxjfVhI1fclwmfjXzAhXhUBnBEj6YLbZbNVS%2FTr8LF58A%2FaTBDScxrx0A%3D%3D";
+const AIR_KOREA_KEY = "s1yAfTYEGUMulWPpUbEQSGeQRqbSHRxjfVhI1fclwmfjXzAhXhUBnBEj6YLbZbNVS%2FTr8LF58A%2FaTBDScxrx0A%3D%3D";
 
 export default class App extends Component {
   state = {
-    isLoaded : false,
+    isWeatherLoaded : false,
+    isAirLoaded : false,
     error : null,
     temperature:null,
-    name:null
+    name:null,
+    pm10Value: null,
+    pm10Grade1h : null,
+    pm25Value : null,
+    pm25Grade1h : null
   };
 
   componentDidMount(){
     navigator.geolocation.getCurrentPosition(position => {
       this._getWeather(position.coords.latitude, position.coords.longitude);
-
       this._changeTM(position.coords.latitude, position.coords.longitude);
       console.log('lat',position.coords.latitude);
       console.log('lon',position.coords.longitude);
@@ -38,7 +42,7 @@ export default class App extends Component {
       this.setState({
         temperature : json.main.temp,
         name:json.weather[0].main,
-        isLoaded : true
+        isWeatherLoaded : true
       });
       console.log(json.weather[0].main);
     })
@@ -55,19 +59,44 @@ export default class App extends Component {
     .then(json => {
       let tmX = json.documents[0].x;
       let tmY = json.documents[0].y;
-      fetch(`http://openapi.airkorea.or.kr/openapi/services/rest/MsrstnInfoInqireSvc/getNearbyMsrstnList?tmX=${tmX}&tmY=${tmY}&pageNo=1&numOfRows=10&ServiceKey=${NEAR_AIR_KOREA_KEY}&_returnType=json`)
-      .then(res => console.log(res))
-      
+      fetch(`http://openapi.airkorea.or.kr/openapi/services/rest/MsrstnInfoInqireSvc/getNearbyMsrstnList?tmX=${tmX}&tmY=${tmY}&pageNo=1&numOfRows=10&ServiceKey=${AIR_KOREA_KEY}&_returnType=json`)
+      .then(res => res.json())
+      .then(json => {
+        let stationName = json.list[0].stationName;
+        fetch(`http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=${stationName}&dataTerm=daily&pageNo=1&numOfRows=10&ServiceKey=${AIR_KOREA_KEY}&ver=1.3&_returnType=json`)
+        .then(res => res.json())
+        .then(json => {
+          this.setState({
+            isWeatherLoaded : true,
+            pm10Value : json.list[0].pm10Value,
+            pm10Grade1h : this._setPmGrade(json.list[0].pm10Grade1h),
+            pm25Value : json.list[0].pm25Value,
+            pm25Grade1h : this._setPmGrade(json.list[0].pm25Grade1h)
+          })
+        })
+      })
     })
   }
 
+  _setPmGrade = (grade) => {
+    if(grade === '1'){
+      return '좋음';
+    }else if(grade === '2'){
+      return '보통';
+    }else if(grade === '3'){
+      return '나쁨';
+    }else if(grade === '4'){
+      return '매우나쁨';
+    }
+  }
+
   render() {
-    const { isLoaded, error, temperature, name } = this.state;
+    const { isWeatherLoaded, isAirLoaded, error, temperature, name, pm10Value, pm10Grade1h, pm25Value, pm25Grade1h } = this.state;
     return (
       <View style={styles.container}>
         <StatusBar barStyle="default" translucent={true} backgroundColor={'transparent'} />
-        { isLoaded ? (
-        <Weather temp={Math.floor(temperature)} weatherName={name} />
+        { (isWeatherLoaded || isAirLoaded) ? (
+        <Weather temp={Math.floor(temperature)} weatherName={name} pm10Value={pm10Value} pm10Grade1h={pm10Grade1h} pm25Value={pm25Value} pm25Grade1h={pm25Grade1h}/>
         ) : (
         <View style={styles.loading}>
           <ActivityIndicator/>

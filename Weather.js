@@ -79,12 +79,14 @@ const weatherCases = {
     }
 }
 
-function Weather({ temp, weatherName }){
+function Weather({ temp, weatherName, pm10Value, pm10Grade1h, pm25Value, pm25Grade1h }){
     return(
         <LinearGradient style = {styles.container} colors={weatherCases[weatherName].colors}>
             <View style={styles.upper}>
                 <Ionicons color="white" size={144} name={weatherCases[weatherName].icon} />
                 <Text style={styles.temp}>{temp} ℃</Text>
+                <Text style={styles.pm}>pm10 : {pm10Value} ㎍/㎥ {pm10Grade1h}</Text>
+                <Text style={styles.pm}>pm25 : {pm25Value} ㎍/㎥ {pm25Grade1h}</Text>
             </View>
             <View style={styles.lower}>
                 <Text style={styles.title}>{weatherCases[weatherName].title}</Text>
@@ -106,7 +108,7 @@ const styles = StyleSheet.create({
         flex:1
     },
     upper:{
-        flex:1,
+        flex:3,
         alignItems:'center',
         justifyContent:'center'
     },
@@ -115,8 +117,13 @@ const styles = StyleSheet.create({
         color:'white',
         marginTop:10
     },
+    pm : {
+        fontSize:22,
+        marginTop:10,
+        color:'white'
+    },
     lower:{
-        flex:1,
+        flex:2,
         alignItems:'flex-start',
         justifyContent:'flex-end',
         paddingLeft:25
