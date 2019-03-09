@@ -96,10 +96,10 @@ function Weather({ temp, weatherName, pm10Value, pm10Grade1h, pm25Value, pm25Gra
     );
 }
 
-Weather.propTypes = {
-    temp : PropTypes.number.isRequired,
-    weatherName : PropTypes.string.isRequired
-};
+// Weather.propTypes = {
+//     temp : PropTypes.number.isRequired,
+//     weatherName : PropTypes.string.isRequired
+// };
 
 export default Weather;
 

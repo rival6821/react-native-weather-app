@@ -1,5 +1,5 @@
 import React,{ Component } from 'react';
-import { ActivityIndicator, StyleSheet, Text, View, StatusBar } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View, StatusBar, Image, TouchableHighlight } from 'react-native';
 import Weather from './Weather';
 
 const APP_KEY = "33bf830a75bbaf2a0a9229d6c7f5c6da";
@@ -19,6 +19,27 @@ export default class App extends Component {
   };
 
   componentDidMount(){
+    navigator.geolocation.getCurrentPosition(position => {
+      this._getWeather(position.coords.latitude, position.coords.longitude);
+      this._changeTM(position.coords.latitude, position.coords.longitude);
+      console.log('lat',position.coords.latitude);
+      console.log('lon',position.coords.longitude);
+    },
+    error => {
+      this.setState({
+        error : error
+      });
+      console.log(error);
+    }
+    );
+  }
+
+  _reloading = () => {
+    console.log('reloading function');
+    this.setState({
+      isWeatherLoaded : false,
+      isAirLoaded : false
+    });
     navigator.geolocation.getCurrentPosition(position => {
       this._getWeather(position.coords.latitude, position.coords.longitude);
       this._changeTM(position.coords.latitude, position.coords.longitude);
@@ -96,7 +117,15 @@ export default class App extends Component {
       <View style={styles.container}>
         <StatusBar barStyle="default" translucent={true} backgroundColor={'transparent'} />
         { (isWeatherLoaded || isAirLoaded) ? (
-        <Weather temp={Math.floor(temperature)} weatherName={name} pm10Value={pm10Value} pm10Grade1h={pm10Grade1h} pm25Value={pm25Value} pm25Grade1h={pm25Grade1h}/>
+          <>
+          <TouchableHighlight onPress={() => this._reloading()} style={styles.reloadImgWrap}>
+            <Image
+              style={styles.reloadImg}
+              source={require('./assets/reload.png')}
+            />
+          </TouchableHighlight>
+            <Weather temp={Math.floor(temperature)} weatherName={name} pm10Value={pm10Value} pm10Grade1h={pm10Grade1h} pm25Value={pm25Value} pm25Grade1h={pm25Grade1h}/>
+          </>
         ) : (
         <View style={styles.loading}>
           <ActivityIndicator/>
@@ -111,7 +140,20 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex : 1,
-    backgroundColor : '#fff'
+    backgroundColor : '#fff',
+    position:'relative'
+  },
+  reloadImgWrap : {
+    width:30,
+    height:30,
+    position:'absolute',
+    top:35,
+    right:15,
+    zIndex:2
+  },
+  reloadImg:{
+    width:30,
+    height:30
   },
   errorText:{
     color:'red',
