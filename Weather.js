@@ -85,8 +85,8 @@ function Weather({ temp, weatherName, pm10Value, pm10Grade1h, pm25Value, pm25Gra
             <View style={styles.upper}>
                 <Ionicons color="white" size={144} name={weatherCases[weatherName].icon} />
                 <Text style={styles.temp}>{temp} ℃</Text>
-                <Text style={styles.pm}>pm10 : {pm10Value} ㎍/㎥ {pm10Grade1h}</Text>
-                <Text style={styles.pm}>pm25 : {pm25Value} ㎍/㎥ {pm25Grade1h}</Text>
+                <Text style={styles.pm}>미세먼지 : {pm10Value} ㎍/㎥ {pm10Grade1h}</Text>
+                <Text style={styles.pm}>초미세먼지 : {pm25Value} ㎍/㎥ {pm25Grade1h}</Text>
             </View>
             <View style={styles.lower}>
                 <Text style={styles.title}>{weatherCases[weatherName].title}</Text>
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
         marginTop:10
     },
     pm : {
-        fontSize:22,
+        fontSize:20,
         marginTop:10,
         color:'white'
     },
@@ -137,6 +137,6 @@ const styles = StyleSheet.create({
     subTitle:{
         fontSize:24,
         color:'white',
-        marginBottom:80
+        marginBottom:60
     }
 });
