@@ -1,9 +1,8 @@
 import React,{ Component } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View, StatusBar, Image, TouchableHighlight } from 'react-native';
 import Weather from './Weather';
+import { APP_KEY, AIR_KOREA_KEY } from './env';
 
-const APP_KEY = "33bf830a75bbaf2a0a9229d6c7f5c6da";
-const AIR_KOREA_KEY = "s1yAfTYEGUMulWPpUbEQSGeQRqbSHRxjfVhI1fclwmfjXzAhXhUBnBEj6YLbZbNVS%2FTr8LF58A%2FaTBDScxrx0A%3D%3D";
 
 export default class App extends Component {
   state = {
