@@ -82,6 +82,18 @@ const weatherCases = {
         title : "안개가 자욱합니다",
         subTitle : "운전에 조심하세요",
         icon : 'ios-menu'
+    },
+    'Squalls' : {
+        colors : ['#d7d2cc','#304352'],
+        title : "돌풍이 불고있습니다",
+        subTitle : "외출시 주의하세요",
+        icon : 'ios-menu'
+    },
+    'Tornado' : {
+        colors : ['#d7d2cc','#304352'],
+        title : "바람이 많이 불고 구름이 많습니다",
+        subTitle : "운전에 조심하세요",
+        icon : 'ios-menu'
     }
 }
 
