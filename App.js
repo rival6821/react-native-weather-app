@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     textAlign : 'center'
   },
   loading : {
-    backgroundColor : '#fdf6aa',
+    backgroundColor : '#50D1EF',
     flex : 1,
     justifyContent : 'flex-end'
   },
@@ -175,7 +175,8 @@ const styles = StyleSheet.create({
     fontSize : 35,
     marginBottom : 200,
     textAlign : 'center',
-    marginTop : 24
+    marginTop : 24,
+    color:'white'
   },
 });
 

@@ -8,13 +8,13 @@
       "ios",
       "android"
     ],
-    "version": "1.0.6",
+    "version": "1.0.7",
     "orientation": "portrait",
     "icon": "./assets/icons/Icon-xxxhdpi.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#50D1EF"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -28,7 +28,7 @@
     },
     "android" : {
       "package" : "xyz.rival6821",
-      "versionCode" : 3
+      "versionCode" : 4
     }
   }
 }
