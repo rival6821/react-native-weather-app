@@ -5,73 +5,79 @@ import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 
 const weatherCases = {
-    Rain : {
+    'Rain' : {
         colors : ['#00c6fb','#005bea'],
         title : "비가 내리고 있습니다",
         subTitle : "우산을 챙기세요",
         icon : 'ios-rainy'
     },
-    Clear : {
+    'Clear' : {
         colors : ['#fef253','#ff7300'],
         title : "날씨가 화창합니다",
         subTitle : "외출하기 좋은 날씨예요",
         icon : 'ios-sunny'
     },
-    Thunderstorm : {
+    'Thunderstorm' : {
         colors : ['#00ecbc','#007adf'],
         title : "천둥이 치고있습니다",
         subTitle : "외출을 자제해 주세요",
         icon : 'ios-thunderstorm'
     },
-    Drizzle : {
+    'Drizzle' : {
         colors : ['#89f7fe','#66a6ff'],
         title : "이슬비가 내리고 있습니다",
         subTitle : "우산을 챙기세요",
         icon : 'ios-rainy'
     },
-    Snow : {
+    'Snow' : {
         colors : ['#7de2fc','#b9b6e5'],
         title : "눈이 내리고 있습니다",
         subTitle : "외출에 조심하세요",
         icon : 'ios-snow'
     },
-    Clouds : {
+    'Clouds' : {
         colors : ['#d7d2cc','#304352'],
         title : "구름낀 날씨입니다",
         subTitle : "해를 보기 힘들것 같아요",
         icon : 'ios-cloudy'
     },
-    Atmosphere : {
+    'Atmosphere' : {
         colors : ['#d7d2cc','#304352'],
         title : "안개가 자욱합니다",
         subTitle : "운전에 조심하세요",
         icon : 'ios-menu'
     },
-    Haze : {
+    'Haze' : {
         colors : ['#d7d2cc','#304352'],
         title : "안개가 자욱합니다",
         subTitle : "운전에 조심하세요",
         icon : 'ios-menu'
     },
-    Mist : {
+    'Mist' : {
         colors : ['#d7d2cc','#304352'],
         title : "안개가 자욱합니다",
         subTitle : "운전에 조심하세요",
         icon : 'ios-menu'
     },
-    Smoke : {
+    'Smoke' : {
         colors : ['#d7d2cc','#304352'],
         title : "안개가 자욱합니다",
         subTitle : "운전에 조심하세요",
         icon : 'ios-menu'
     },
-    Dust : {
+    'Dust' : {
         colors : ['#d7d2cc','#304352'],
         title : "안개가 자욱합니다",
         subTitle : "운전에 조심하세요",
         icon : 'ios-menu'
     },
-    Sand : {
+    'Sand' : {
+        colors : ['#d7d2cc','#304352'],
+        title : "안개가 자욱합니다",
+        subTitle : "운전에 조심하세요",
+        icon : 'ios-menu'
+    },
+    'Fog' : {
         colors : ['#d7d2cc','#304352'],
         title : "안개가 자욱합니다",
         subTitle : "운전에 조심하세요",
@@ -96,10 +102,10 @@ function Weather({ temp, weatherName, pm10Value, pm10Grade1h, pm25Value, pm25Gra
     );
 }
 
-// Weather.propTypes = {
-//     temp : PropTypes.number.isRequired,
-//     weatherName : PropTypes.string.isRequired
-// };
+ Weather.propTypes = {
+     temp : PropTypes.number.isRequired,
+     weatherName : PropTypes.string.isRequired
+ };
 
 export default Weather;
 
