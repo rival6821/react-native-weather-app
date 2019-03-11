@@ -1,5 +1,6 @@
 import React,{ Component } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View, StatusBar, Image, TouchableHighlight } from 'react-native';
+import { LinearGradient } from 'expo';
 import Weather from './Weather';
 import { APP_KEY, AIR_KOREA_KEY } from './env';
 
@@ -134,11 +135,11 @@ export default class App extends Component {
             humidity={humidity}/>
           </>
         ) : (
-        <View style={styles.loading}>
+        <LinearGradient style={styles.loading} colors={['#00FFFF','#50D1EF']}>
           <ActivityIndicator/>
           { error ? <Text style={styles.errorText}>{error}</Text> : null }
           <Text style={styles.loadingText}>날씨를 불러오는 중</Text>
-        </View>)}
+        </LinearGradient>)}
       </View>
     );
   }
@@ -167,7 +168,6 @@ const styles = StyleSheet.create({
     textAlign : 'center'
   },
   loading : {
-    backgroundColor : '#50D1EF',
     flex : 1,
     justifyContent : 'flex-end'
   },
