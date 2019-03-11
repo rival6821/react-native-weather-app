@@ -27,7 +27,8 @@
       "bundleIdentifier": "xyz.rival6821"
     },
     "android" : {
-      "package" : "xyz.rival6821"
+      "package" : "xyz.rival6821",
+      "versionCode" : 2
     }
   }
 }
