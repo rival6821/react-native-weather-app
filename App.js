@@ -14,7 +14,8 @@ export default class App extends Component {
     pm10Value: null,
     pm10Grade1h : null,
     pm25Value : null,
-    pm25Grade1h : null
+    pm25Grade1h : null,
+    humidity : null
   };
 
   componentDidMount(){
@@ -62,9 +63,10 @@ export default class App extends Component {
       this.setState({
         temperature : json.main.temp,
         name:json.weather[0].main,
+        humidity:json.main.humidity,
         isWeatherLoaded : true
       });
-      console.log(json.weather[0].main);
+      console.log(json);
     })
   }
 
@@ -111,7 +113,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { isWeatherLoaded, isAirLoaded, error, temperature, name, pm10Value, pm10Grade1h, pm25Value, pm25Grade1h } = this.state;
+    const { isWeatherLoaded, isAirLoaded, error, temperature, name, pm10Value, pm10Grade1h, pm25Value, pm25Grade1h, humidity } = this.state;
     return (
       <View style={styles.container}>
         <StatusBar barStyle="default" translucent={true} backgroundColor={'transparent'} />
@@ -123,7 +125,13 @@ export default class App extends Component {
               source={require('./assets/reload.png')}
             />
           </TouchableHighlight>
-            <Weather temp={Math.floor(temperature)} weatherName={name} pm10Value={pm10Value} pm10Grade1h={pm10Grade1h} pm25Value={pm25Value} pm25Grade1h={pm25Grade1h}/>
+            <Weather temp={Math.floor(temperature)} 
+            weatherName={name} 
+            pm10Value={pm10Value} 
+            pm10Grade1h={pm10Grade1h} 
+            pm25Value={pm25Value} 
+            pm25Grade1h={pm25Grade1h}
+            humidity={humidity}/>
           </>
         ) : (
         <View style={styles.loading}>

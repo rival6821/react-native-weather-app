@@ -97,7 +97,7 @@ const weatherCases = {
     }
 }
 
-function Weather({ temp, weatherName, pm10Value, pm10Grade1h, pm25Value, pm25Grade1h }){
+function Weather({ temp, weatherName, pm10Value, pm10Grade1h, pm25Value, pm25Grade1h,humidity }){
     return(
         <LinearGradient style = {styles.container} colors={weatherCases[weatherName].colors}>
             <View style={styles.upper}>
@@ -105,6 +105,7 @@ function Weather({ temp, weatherName, pm10Value, pm10Grade1h, pm25Value, pm25Gra
                 <Text style={styles.temp}>{temp} ℃</Text>
                 <Text style={styles.pm}>미세먼지 : {pm10Value} ㎍/㎥ {pm10Grade1h}</Text>
                 <Text style={styles.pm}>초미세먼지 : {pm25Value} ㎍/㎥ {pm25Grade1h}</Text>
+                <Text style={styles.humidity}>습도 : {humidity} %</Text>
             </View>
             <View style={styles.lower}>
                 <Text style={styles.title}>{weatherCases[weatherName].title}</Text>
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
         flex:1
     },
     upper:{
-        flex:3,
+        flex:2,
         alignItems:'center',
         justifyContent:'center'
     },
@@ -140,8 +141,13 @@ const styles = StyleSheet.create({
         marginTop:10,
         color:'white'
     },
+    humidity:{
+        fontSize:16,
+        marginTop:10,
+        color:'white'
+    },
     lower:{
-        flex:2,
+        flex:1,
         alignItems:'flex-start',
         justifyContent:'flex-end',
         paddingLeft:25
