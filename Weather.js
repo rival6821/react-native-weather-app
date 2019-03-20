@@ -116,6 +116,7 @@ function Weather({ temp, weatherName, pm10Value, pm10Grade1h, pm25Value, pm25Gra
     );
 }
 
+// 날씨가 정보에 없으면 error로그 올림
 function chkWeather(weatherName){
     if(!weatherCases.hasOwnProperty(weatherName)){
         var date = new Date();
