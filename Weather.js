@@ -98,6 +98,7 @@ const weatherCases = {
 }
 
 function Weather({ temp, weatherName, pm10Value, pm10Grade1h, pm25Value, pm25Grade1h,humidity }){
+    chkWeather();
     return(
         <LinearGradient style = {styles.container} colors={weatherCases[weatherName].colors}>
             <View style={styles.upper}>
@@ -113,6 +114,31 @@ function Weather({ temp, weatherName, pm10Value, pm10Grade1h, pm25Value, pm25Gra
             </View>
         </LinearGradient>
     );
+}
+
+function chkWeather(weatherName){
+    if(!weatherCases.hasOwnProperty(weatherName)){
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth()+1
+        var day = date.getDate();
+        if(month < 10){
+            month = "0"+month;
+        }
+        if(day < 10){
+            day = "0"+day;
+        }
+     
+        var today = year+""+month+""+day;
+        fetch(`http://rival6821.xyz/error_log/weatherError`,{
+            method : 'post',
+            body : {
+                date : today,
+                error : weatherName
+            }
+        })
+        .then(res => console.log(res));
+    }
 }
 
  Weather.propTypes = {
