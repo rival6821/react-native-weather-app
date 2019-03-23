@@ -118,7 +118,7 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <StatusBar barStyle="default" translucent={true} backgroundColor={'transparent'} />
-        { (isWeatherLoaded || isAirLoaded) ? (
+        { (isWeatherLoaded) ? (
           <>
           <TouchableHighlight onPress={() => this._reloading()} style={styles.reloadImgWrap}>
             <Image
