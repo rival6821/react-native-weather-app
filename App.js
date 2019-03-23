@@ -68,6 +68,7 @@ export default class App extends Component {
         isWeatherLoaded : true
       });
       console.log(json);
+      console.log('name',json.weather[0].main);
     })
   }
 
@@ -90,7 +91,6 @@ export default class App extends Component {
         .then(res => res.json())
         .then(json => {
           this.setState({
-            isWeatherLoaded : true,
             pm10Value : json.list[0].pm10Value,
             pm10Grade1h : this._setPmGrade(json.list[0].pm10Grade1h),
             pm25Value : json.list[0].pm25Value,
@@ -114,7 +114,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { isWeatherLoaded, isAirLoaded, error, temperature, name, pm10Value, pm10Grade1h, pm25Value, pm25Grade1h, humidity } = this.state;
+    const { isWeatherLoaded, error, temperature, name, pm10Value, pm10Grade1h, pm25Value, pm25Grade1h, humidity } = this.state;
     return (
       <View style={styles.container}>
         <StatusBar barStyle="default" translucent={true} backgroundColor={'transparent'} />
