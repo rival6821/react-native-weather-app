@@ -3,7 +3,7 @@
     "name": "오늘여기의날씨",
     "slug": "weather-app",
     "privacy": "public",
-    "sdkVersion": "32.0.0",
+    "sdkVersion": "49.0.0",
     "platforms": [
       "ios",
       "android"
